@@ -6,6 +6,7 @@ const errorMiddleware: ErrorRequestHandler<unknown, ApiResponse> = async (err, r
   if(err instanceof AppError){
     return res.status(err.statusCode).json({
       success: false,
+      error: err.message,
       code: err.messageCode
     })
   }
@@ -16,3 +17,5 @@ const errorMiddleware: ErrorRequestHandler<unknown, ApiResponse> = async (err, r
     code: "INTERNAL_SERVER_ERROR",
   })
 }
+
+export default errorMiddleware;
